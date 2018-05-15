@@ -34,8 +34,8 @@ class Authenticator:
         self.attrs = config.get('attrs')
 
     def ldap_auth(self, username, password):
-        ldap.set_option(ldap.OPT_X_TLS_CACERTFILE, self.cert_path)
-
+       # ldap.set_option(ldap.OPT_X_TLS_CACERTFILE, self.cert_path)
+        ldap.set_option(ldap.OPT_X_TLS_REQUIRE_CERT, ldap.OPT_X_TLS_ALLOW)
         connection = ldap.initialize(self.ldap_url)
         connection.set_option(ldap.OPT_REFERRALS, 0)
         attrs = ['dn'] + self.attrs.values()
